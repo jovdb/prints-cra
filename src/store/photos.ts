@@ -50,13 +50,14 @@ export function usePhotos() {
 	return Object.values(photos);
 }
 
-export function usePhoto(photoId: string) {
+export function usePhoto(photoId: string | undefined) {
 	const [photos, setPhotos] = useAtom(photosAtom);
 
 	return [
-		photos[photoId],
+		photoId ? photos[photoId]: undefined,
 		useCallback(
 			function setPhoto(updater: (current: IPhoto) => IPhoto) {
+				if (!photoId) return;
 				setPhotos(prev => {
 					if (!prev[photoId]) return prev;
 					return {

@@ -67,13 +67,14 @@ export function usePrints() {
 	return Object.values(prints);
 }
 
-export function usePrint(printId: string) {
+export function usePrint(printId: string | undefined) {
 	const [prints, setPrints] = useAtom(printsAtom);
 
 	return [
-		prints[printId],
+		printId ? prints[printId] : undefined,
 		useCallback(
 			function setPrint(updater: (current: IPrint) => IPrint) {
+				if (!printId) return;
 				setPrints(prev => {
 					if (!prev[printId]) return prev;
 					return {
