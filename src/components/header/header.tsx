@@ -1,22 +1,22 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
-import styles from './header.module.css'
+import "./header.css";
 
 export const Header = ({ children }: React.PropsWithChildren) => (
-	<header className={styles.header}>
+	<header className="header">
 		{ children }
 	</header>
 );
 Header.displayName = "Header";
 
 export const HeaderLeft = ({ children }: React.PropsWithChildren) => (
-	<div className={styles.header__left}>
+	<div className="header__left">
 		{children}
 	</div>
 );
 
 export const HeaderRight = ({ children }: React.PropsWithChildren) => (
-	<div className={styles.header__right}>
+	<div className="header__right">
 		{children}
 	</div>
 );
