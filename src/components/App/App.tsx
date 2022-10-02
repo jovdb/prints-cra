@@ -1,11 +1,13 @@
 import { Header, HeaderLeft, HeaderRight } from '../header';
+import { Logo } from '../logo';
+
 import './App.css';
 
 export function App() {
   return (
     <div className="App">
       <Header>
-        <HeaderLeft>Logo</HeaderLeft>
+        <HeaderLeft><Logo /></HeaderLeft>
         <HeaderRight>Price</HeaderRight>
       </Header>
     </div>
