@@ -1,9 +1,8 @@
+import { useTotalPrice } from "../../store/prints";
 import { Price } from "./price";
-import { useAtom } from "jotai";
-import { totalPriceAtom } from "../../store/prints";
 
 export const PriceContainer = () => {
-	const [price] = useAtom(totalPriceAtom);
+	const price = useTotalPrice();
 	return (
 		<Price value={price + "€"} />
 	);

@@ -1,4 +1,5 @@
-import { atom } from "jotai";
+import { atom, useAtom } from "jotai";
+import { useCallback } from "react";
 
 export type PrintFormat = "15" | "18";
 
@@ -60,3 +61,32 @@ export const totalPriceAtom = atom(
 			.reduce((prev, print) => prev + print.quantity * 0.5, 0);
 	}
 )
+
+export function usePrints() {
+	const [prints] = useAtom(printsAtom);
+	return Object.values(prints);
+}
+
+export function usePrint(printId: string) {
+	const [prints, setPrints] = useAtom(printsAtom);
+
+	return [
+		prints[printId],
+		useCallback(
+			function setPrint(updater: (current: IPrint) => IPrint) {
+				setPrints(prev => {
+					if (!prev[printId]) return prev;
+					return {
+						...prev,
+						[printId]: updater(prev[printId]),
+					};
+				});
+			},
+			[printId, setPrints],
+		),
+	] as const;
+}
+
+export function useTotalPrice() {
+	return useAtom(totalPriceAtom)[0];
+}

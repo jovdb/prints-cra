@@ -1,4 +1,5 @@
-import { atom } from "jotai";
+import { atom, useAtom } from "jotai";
+import { useCallback } from "react";
 
 export interface IPhoto {
 	id: string;
@@ -43,3 +44,28 @@ const defaultPhotos: Photos = {
 };
 
 export const photosAtom = atom<Photos>(defaultPhotos);
+
+export function usePhotos() {
+	const [photos] = useAtom(photosAtom);
+	return Object.values(photos);
+}
+
+export function usePhoto(photoId: string) {
+	const [photos, setPhotos] = useAtom(photosAtom);
+
+	return [
+		photos[photoId],
+		useCallback(
+			function setPhoto(updater: (current: IPhoto) => IPhoto) {
+				setPhotos(prev => {
+					if (!prev[photoId]) return prev;
+					return {
+						...prev,
+						[photoId]: updater(prev[photoId]),
+					};
+				});
+			},
+			[photoId, setPhotos],
+		),
+	] as const;
+}
