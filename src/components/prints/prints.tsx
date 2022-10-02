@@ -1,4 +1,4 @@
-import { usePrints } from "../../store/prints";
+import { usePrints } from "../../hooks/prints";
 import { PrintItem } from "../print-item";
 
 export const Prints = () => {

@@ -1,4 +1,4 @@
-import { useEditingPrintId } from '../../store/prints-edit';
+import { useEditingPrintId } from '../../hooks/app';
 import { Header, HeaderLeft, HeaderRight } from '../header';
 import { Logo } from '../logo';
 import { Price } from '../price';

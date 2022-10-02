@@ -1,4 +1,4 @@
-import { useTotalPrice } from "../../store/prints";
+import { useTotalPrice } from "../../hooks/prints";
 import { Price } from "./price";
 
 export const PriceContainer = () => {

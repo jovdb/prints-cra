@@ -1,6 +1,6 @@
-import { usePhoto } from "../../store/photos";
-import { usePrint } from "../../store/prints";
-import { useEditingPrintId } from "../../store/prints-edit";
+import { usePhoto } from "../../hooks/photos";
+import { usePrint } from "../../hooks/prints";
+import { useEditingPrintId } from "../../hooks/app";
 import { PrintEdit } from "./print-edit";
 
 export const PrintEditContainer = () => {
