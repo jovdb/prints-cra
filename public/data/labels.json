@@ -2,6 +2,9 @@
     
     "Label.Quantity": "Quantity",
     "Label.PrintsEdit.Back": "BACK",
+    "Label.Prints.AdddPhotos": "Add photo's",
+    "Label.PrintEdit.Format": "Format",
+    "Label.PrintEdit.Effect": "Effect",
     "Label.Test1": "This is dummy test",
     "Label.Test3": "This is dummy test",
     "Label.Test4": "This is dummy test",

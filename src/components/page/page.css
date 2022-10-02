@@ -1,4 +1,4 @@
-.App {
+.page {
   margin: 0;
   height: 100%;
   width: 100%;
@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 
-.App__content {
+.page__body {
   flex-grow: 1;
   overflow-y: scroll;
 }

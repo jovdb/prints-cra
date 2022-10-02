@@ -1,7 +1,7 @@
 import { usePrints } from "../../hooks/prints";
 import { PrintItem } from "../print-item";
 
-export const Prints = () => {
+export const PrintsList = () => {
 	const prints = usePrints();
 
 	return (
@@ -17,4 +17,4 @@ export const Prints = () => {
 		</>
 	);
 };
-Prints.displayName = "Prints";
+PrintsList.displayName = "Prints";

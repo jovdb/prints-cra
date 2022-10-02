@@ -1,15 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { App } from './components/App';
 import reportWebVitals from './reportWebVitals';
+import { RouterProvider, createHashRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Prints } from './pages/Prints';
+import { PrintEdit } from './pages/PrintsEdit';
+
+const router = createHashRouter([ // Hash roote because we don't want a page refresh
+  {
+    path: "/edit/:id",
+    element: <PrintEdit/>,
+  },
+  {
+    path: "/",
+    element: <Prints />,
+  },
+]);
+
+const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

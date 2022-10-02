@@ -1,11 +1,12 @@
+import { useParams, useNavigate } from "react-router-dom"; 
 import { usePhoto } from "../../hooks/photos";
 import { usePrint } from "../../hooks/prints";
-import { useEditingPrintId } from "../../hooks/app";
 import { PrintEdit } from "./print-edit";
 import { useLabels } from "../../hooks/labels";
 
 export const PrintEditContainer = () => {
-	const [editingPrintId, setEditingPrintId] = useEditingPrintId();
+	const{ id: editingPrintId } = useParams();
+	const navigate = useNavigate();
 	const [print] = usePrint(editingPrintId);
 	const [photo] = usePhoto(print?.photoId);
 	const [labels] = useLabels(["Label.PrintsEdit.Back"]);
@@ -15,7 +16,7 @@ export const PrintEditContainer = () => {
 		<PrintEdit
 			labels={labels}
 			photo={photo}
-			onClose={() => { setEditingPrintId(undefined); }}
+			onClose={() => { navigate(-1); }}
 		/>
 	);
 };

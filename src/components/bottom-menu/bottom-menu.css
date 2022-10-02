@@ -3,7 +3,7 @@
 	flex-grow: 1;
 }
 
-.bottom-menu button {
+.bottom-menu__button {
 	height: 60px;
 	flex-grow: 1;
 	flex-shrink: 0;

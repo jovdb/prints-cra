@@ -24,6 +24,6 @@ const emptyValue = new Proxy({}, {
 });
 
 export function useLabels<TLabels extends LabelNames>(labels: TLabels[]): [Labels<TLabels>, boolean] {
-	const { isFetching, data } = useQuery('labels', getLabels)
+	const { isFetching, data } = useQuery('labels', getLabels, { staleTime: Infinity, refetchOnWindowFocus: false, refetchOnMount: false })
 	return [data || emptyValue, isFetching] as any;
 }
