@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
 export type PrintFormat = "15" | "18";
 
@@ -50,7 +51,7 @@ const defaultPrints: Prints = {
 	},
 };
 
-export const printsAtom = atom<Prints>(defaultPrints);
+export const printsAtom = atomWithStorage<Prints>("prints", defaultPrints);
 
 export const totalPriceAtom = atom(
   (get) => {
