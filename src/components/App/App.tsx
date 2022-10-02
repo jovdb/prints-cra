@@ -9,7 +9,7 @@ export function App() {
     <div className="App">
       <Header>
         <HeaderLeft><Logo /></HeaderLeft>
-        <HeaderRight><Price value="1€"/></HeaderRight>
+        <HeaderRight><Price /></HeaderRight>
       </Header>
     </div>
   );

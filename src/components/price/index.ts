@@ -1,1 +1,1 @@
-export * from "./price";
+export { PriceContainer as Price } from "./price.container";
