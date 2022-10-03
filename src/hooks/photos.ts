@@ -1,6 +1,7 @@
 import { useAtom } from "jotai";
 import { useCallback } from "react";
-import { photosAtom, IPhoto } from "../store/photos";
+import { photosAtom } from "../store/photos";
+import { IPhoto } from "../types";
 
 export function usePhotos() {
 	const [photos] = useAtom(photosAtom);

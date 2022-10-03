@@ -5,9 +5,10 @@ import { PrintsList } from '../../components/prints-list';
 import { BottomMenu, BottomMenuButton } from '../../components/bottom-menu';
 import { Page, PageHeader, PageBody, PageFooter } from '../../components/page';
 import { useLabels } from '../../hooks/labels';
+import { useInitState } from '../../hooks/api';
 
 export function Prints() {
-
+	useInitState();
   const [labels, areLabelsLoading] = useLabels(["Label.Prints.AdddPhotos"]);
   if (areLabelsLoading) return null;
 

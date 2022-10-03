@@ -1,5 +1,5 @@
 import { Labels } from "../../hooks/labels";
-import { IPhoto } from "../../store/photos";
+import { IPhoto } from "../../types";
 import "./print-edit.css";
 
 export const PrintEdit = ({

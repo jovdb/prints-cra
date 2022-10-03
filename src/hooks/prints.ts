@@ -1,6 +1,7 @@
 import { useAtom } from "jotai";
 import { useCallback } from "react";
-import { printsAtom, IPrint, totalPriceAtom } from "../store/prints";
+import { printsAtom, totalPriceAtom } from "../store/prints";
+import { IPrint } from "../types";
 
 export function usePrints() {
 	const [prints] = useAtom(printsAtom);
