@@ -1,8 +1,10 @@
 import { Price } from "./price";
-import { useStore } from "../../hooks/store";
+import { usePrints } from "../../hooks/prints";
+import { getTotalPrice } from "../../store/prints";
 
 export const PriceContainer = () => {
-	const price = useStore((s) => s.getTotalPrice());
+	const [prints] = usePrints();
+	const price = getTotalPrice(prints);
 
 	return (
 		<Price value={price + "€"} />

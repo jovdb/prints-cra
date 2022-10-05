@@ -1,50 +1,66 @@
 import create from "zustand/vanilla";
 
-import type { IPrint, Photos, Prints } from "../types";
+import type { IPrint, Prints } from "../types";
 
-export interface IStore {
+export interface IPrintsStore {
 	prints: Prints;
-	photos: Photos;
-	setPrint(printId: string, updater: (print: IPrint) => IPrint): void;
-	setStore(updater: (prev: IStore) => Pick<IStore, "photos" | "prints">): void;
-	getTotalPrice(): number;
+	reset(prints?: Prints): void;
+	addPrint(print: IPrint): void;
+	removePrint(printId: string): void;
+	updatePrint(printId: string, newPrint: IPrint): void;
 }
 
-export let store = create<IStore>(
+// Vanilla zustand store
+export let printsStore = create<IPrintsStore>(
 	(set, get) => ({
 		prints: {},
-		photos: {},
 
-		setStore(updater: (prev: IStore) => Pick<IStore, "photos" | "prints">) {
-			const currentValue= get();
-			const newValue = updater(currentValue);
-			if (currentValue === newValue) return;
-
-			set({
-				prints: newValue.prints,
-				photos: newValue.photos,
-			}, false);
+		reset(prints = {}) {
+			set({ prints });
 		},
 
-		setPrint(printId: string, updater: (print: IPrint) => IPrint) {
-			const print = get().prints[printId];
-			const newPrint = updater(print);
-			if (print === newPrint) return;
-
-			set((prevState) => ({
-				...prevState,
+		addPrint(print) {
+			set(({prints}) => ({
 				prints: {
-					...prevState.prints,
+					...prints,
+					[print.printId]: print,
+				}
+			}));
+		},
+
+		removePrint(printId) {
+			set(({prints}) => {
+				const { [printId]: _, ...rest } = prints;
+				return {
+					prints: rest,
+				};
+			});
+		},
+
+		updatePrint(printId, newPrint) {
+			set(({prints}) => ({
+				prints: {
+					...prints,
 					[printId]: newPrint,
 				},
-			}), true);
-		},
-
-		getTotalPrice() {
-			const state = get();
-			return Object
-				.values(state.prints)
-				.reduce((prev, print) => prev + print.quantity * 0.5, 0);
+			}));
 		},
 	})
 );
+
+
+// Selectors
+export function getTotalPrice(prints: readonly IPrint[]) {
+	return prints
+		.reduce((prev, print) => prev + print.quantity * 0.5, 0);
+};
+
+
+export function getPrints(prints: Prints) {
+	return Object.values(prints); // could be later sorted
+};
+
+export function getPrint(prints: Prints, printId: string | undefined) {
+	if (!printId) return undefined;
+	return prints[printId];
+};

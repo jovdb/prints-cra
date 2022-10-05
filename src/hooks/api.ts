@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
-import { useStore } from "../hooks/store";
+import { usePrintsActions } from "./prints";
+import { usePhotosActions } from "./photos";
 
 import type * as StateJson from "../../public/data/state.json";
 
@@ -20,13 +21,12 @@ async function getData() {
 
 export function useInitState() {
 	const { data } = useQuery('api', getData, { staleTime: Infinity, refetchOnWindowFocus: false, refetchOnMount: false })
-	const initState = useStore((s) => s.setStore);
+	const { reset: resetPrints } = usePrintsActions();
+	const { reset: resetPhotos } = usePhotosActions();
 
 	useEffect(() => {
 		if (!data) return;
-		initState((prevState) => ({
-			prints: Object.keys(prevState.prints).length ? prevState.prints : data.prints,
-			photos: Object.keys(prevState.photos).length ? prevState.photos : data.photos,
-		}));
-	}, [data, initState]);
+		resetPrints(data.prints);
+		resetPhotos(data.photos);
+	}, [data, resetPhotos, resetPrints]);
 }

@@ -1,7 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom"; 
 import { PrintEdit } from "./print-edit";
 import { useLabels } from "../../hooks/labels";
-import { usePhoto, usePrint } from "../../hooks/store";
+import { usePrint } from "../../hooks/prints";
+import { usePhoto } from "../../hooks/photos";
 
 export const PrintEditContainer = () => {
 	const{ id: editingPrintId } = useParams();

@@ -1,11 +1,11 @@
-import { useStore } from "../../hooks/store";
+import { usePrints } from "../../hooks/prints";
 import { PrintItem } from "../print-item";
 
 export const PrintsList = () => {
-	const prints = useStore(s => s.prints);
+	const [prints] = usePrints();
 	return (
 		<>
-			{Object.keys(prints).map((printId) => {
+			{prints.map((printId) => {
 				return (
 					<PrintItem
 						key={printId}

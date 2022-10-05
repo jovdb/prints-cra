@@ -2,16 +2,18 @@ import { PrintItem } from "./print-item";
 import "./print-item.css";
 import { useLabels } from "../../hooks/labels";
 import { useNavigate } from "react-router-dom";
-import { useStore } from "../../hooks/store";
+import { usePrint, usePrintsActions } from "../../hooks/prints";
+import { usePhoto } from "../../hooks/photos";
 
 export const PrintItemContainer = ({
 	printId,
 }: {
 	printId: string;
 }) => {
-	const print = useStore((s) => s.prints[printId]);
-	const photo = useStore((s) => s.photos[print.photoId]);
-	const setPrint = useStore((s) => s.setPrint);
+	const print = usePrint(printId);
+	const photo = usePhoto(print?.photoId);
+	const { updatePrint } = usePrintsActions();
+
 	const [labels] = useLabels(["Label.Quantity"]);
 	const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ export const PrintItemContainer = ({
 			photo={photo}
 			print={print}
 			labels={labels}
-			onSetQuantity={(quantity) => setPrint(printId, prev => ({ ...prev, quantity }))}
+			onSetQuantity={(quantity) => updatePrint(printId, { ...print, quantity })}
 			onEditClicked={() => { navigate(`/edit/${print.printId}`); }}
 		/>
 	);
