@@ -5,7 +5,7 @@ export const PrintsList = () => {
 	const [prints] = usePrints();
 	return (
 		<>
-			{prints.map((printId) => {
+			{Object.keys(prints).map((printId) => {
 				return (
 					<PrintItem
 						key={printId}
