@@ -1,5 +1,7 @@
 import { Labels } from "../../hooks/labels";
 import { IPrint, IPhoto } from "../../types";
+import { PlaceholderImage } from "../placeholder-image";
+
 import "./print-item.css";
 
 export const PrintItem = ({
@@ -18,7 +20,8 @@ export const PrintItem = ({
 	return (
 		<div className="print-item">
 			<div className="print-item__img">
-				<img
+				<PlaceholderImage
+					aspectRatio={(photo.width / photo.height)}
 					loading="lazy"
 					onClick={(e) => { onEditClicked(); e.preventDefault(); }}
 					src={photo?.url}
